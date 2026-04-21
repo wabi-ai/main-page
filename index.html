@@ -236,6 +236,45 @@
       border: none; cursor: pointer;
     }
     .cta-note { font-size: 12px; color: var(--note-col); text-align: center; }
+
+    /* ── TABLET / IPAD (600px – 1024px) ── */
+    @media (min-width: 600px) and (max-width: 1024px) {
+      nav { padding: 24px 32px; }
+      .ticker { top: 27px; font-size: 11px; }
+      .ring-wrap { width: min(600px,80vmin); height: min(600px,80vmin); }
+      .headline { bottom: 92px; left: 32px; }
+      .headline h1 { font-size: clamp(28px,4.5vw,48px); }
+      .about-btn { bottom: 36px; left: 32px; }
+      .toggle-wrap { bottom: 36px; right: 32px; }
+      .panel { width: min(560px,100vw); padding: 80px 40px; }
+      .panel-close { margin: -80px -40px 48px; padding: 28px 40px; }
+    }
+
+    /* ── MOBILE (≤ 599px) ── */
+    @media (max-width: 599px) {
+      nav { padding: 20px 24px; }
+      .ticker { top: 22px; font-size: 10px; letter-spacing: 1px; gap: 6px; }
+      .ring-wrap { top: 43%; width: min(420px,78vmin); height: min(420px,78vmin); }
+      .headline { bottom: 100px; left: 24px; max-width: calc(100vw - 48px); }
+      .headline h1 { font-size: clamp(24px,7.5vw,36px); letter-spacing: -1px; }
+      .about-btn { bottom: 44px; left: 24px; font-size: 13px; }
+      .toggle-wrap { bottom: 44px; right: 24px; }
+      .panel { padding: 70px 24px; }
+      .panel-close { margin: -70px -24px 36px; padding: 20px 24px; }
+      .panel h2 { font-size: clamp(38px,10vw,54px); letter-spacing: -2px; margin-bottom: 36px; }
+      .ps p { font-size: 15px; line-height: 1.7; }
+      .divider { margin: 28px 0; }
+    }
+
+    /* ── LANDSCAPE PHONE ── */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .ring-wrap { top: 50%; width: min(360px,65vh); height: min(360px,65vh); }
+      .headline { bottom: 64px; }
+      .headline h1 { font-size: clamp(18px,4vh,28px); }
+      .about-btn { bottom: 20px; }
+      .toggle-wrap { bottom: 20px; }
+      .ticker { display: none; }
+    }
   </style>
 </head>
 <body>
