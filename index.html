@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Operativsystem — Wabi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:              #080808;
+      --fg:              #ffffff;
+      --fg-dim:          rgba(255,255,255,0.35);
+      --fg-mid:          rgba(255,255,255,0.55);
+      --ring-glow:       rgba(232,255,87,0.05);
+      --ring-track:      rgba(255,255,255,0.05);
+      --ring-stroke-lg:  rgba(255,255,255,0.13);
+      --ring-stroke-sm:  rgba(255,255,255,0.06);
+      --ring-stroke-mid: rgba(255,255,255,0.18);
+      --ring-stroke-mi2: rgba(255,255,255,0.07);
+      --ring-stroke-in:  rgba(255,255,255,0.22);
+      --ring-stroke-in2: rgba(255,255,255,0.07);
+      --ring-fill-mid:   rgba(255,255,255,0.018);
+      --ring-text:       rgba(255,255,255,1);
+      --ring-text-mid:   rgba(255,255,255,0.72);
+      --ring-text-dim:   rgba(255,255,255,0.38);
+      --ring-arr:        rgba(255,255,255,0.45);
+      --ring-arr-mid:    rgba(255,255,255,0.30);
+      --crosshair:       rgba(255,255,255,0.07);
+      --center-fill:     rgba(0,0,0,0.90);
+      --center-fill2:    rgba(6,6,6,0.95);
+      --center-text:     #ffffff;
+      --center-text-dim: rgba(255,255,255,0.30);
+      --panel-bg:        #ffffff;
+      --panel-fg:        #111111;
+      --panel-p:         #333333;
+      --panel-div:       #e8e8e8;
+      --panel-num:       #bbbbbb;
+      --panel-sub:       #666666;
+      --input-border:    #dddddd;
+      --input-focus:     #111111;
+      --note-col:        #bbbbbb;
+    }
+
+    html.light {
+      --bg:              #f0f0f0;
+      --fg:              #000000;
+      --fg-dim:          rgba(0,0,0,0.40);
+      --fg-mid:          rgba(0,0,0,0.60);
+      --ring-glow:       rgba(0,0,0,0.03);
+      --ring-track:      rgba(0,0,0,0.04);
+      --ring-stroke-lg:  rgba(0,0,0,0.18);
+      --ring-stroke-sm:  rgba(0,0,0,0.07);
+      --ring-stroke-mid: rgba(0,0,0,0.22);
+      --ring-stroke-mi2: rgba(0,0,0,0.08);
+      --ring-stroke-in:  rgba(0,0,0,0.28);
+      --ring-stroke-in2: rgba(0,0,0,0.08);
+      --ring-fill-mid:   rgba(0,0,0,0.018);
+      --ring-text:       rgba(0,0,0,1);
+      --ring-text-mid:   rgba(0,0,0,0.72);
+      --ring-text-dim:   rgba(0,0,0,0.45);
+      --ring-arr:        rgba(0,0,0,0.45);
+      --ring-arr-mid:    rgba(0,0,0,0.30);
+      --crosshair:       rgba(0,0,0,0.10);
+      --center-fill:     rgba(240,240,240,0.95);
+      --center-fill2:    rgba(235,235,235,0.98);
+      --center-text:     #000000;
+      --center-text-dim: rgba(0,0,0,0.35);
+      --panel-bg:        #ffffff;
+      --panel-fg:        #111111;
+      --panel-p:         #333333;
+      --panel-div:       #e0e0e0;
+      --panel-num:       #aaaaaa;
+      --panel-sub:       #555555;
+      --input-border:    #cccccc;
+      --input-focus:     #000000;
+      --note-col:        #aaaaaa;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      transition: background .4s, color .4s;
+    }
+
+    .screen { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 28px 40px; z-index: 200;
+    }
+    .logo { font-size: 14px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--fg); }
+    .logo em { font-style: normal; color: #e8ff57; }
+    .menu-btn {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      background: none; border: none; color: var(--fg); cursor: pointer;
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      position: fixed; top: 31px; left: 50%; transform: translateX(-50%);
+      font-size: 12px; font-weight: 500; letter-spacing: 2px;
+      color: var(--fg-dim); z-index: 200; display: flex; gap: 10px; white-space: nowrap;
+    }
+    #clock { color: var(--fg-mid); font-variant-numeric: tabular-nums; }
+
+    /* ── RING ── */
+    .ring-wrap {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: min(660px,82vmin); height: min(660px,82vmin);
+    }
+    .ring-wrap svg { width: 100%; height: 100%; overflow: visible; }
+
+    .r-outer { animation: cw  70s linear infinite; transform-origin: 300px 300px; }
+    .r-mid   { animation: ccw 45s linear infinite; transform-origin: 300px 300px; }
+    .r-inner { animation: cw  28s linear infinite; transform-origin: 300px 300px; }
+
+    @keyframes cw  { to { transform: rotate(360deg);  } }
+    @keyframes ccw { to { transform: rotate(-360deg); } }
+
+    /* ── HEADLINE ── */
+    .headline {
+      position: fixed; bottom: 88px; left: 40px; z-index: 200; max-width: 480px;
+    }
+    .headline h1 {
+      font-size: clamp(28px, 4vw, 54px);
+      font-weight: 900; line-height: 0.94; letter-spacing: -1.5px; text-transform: uppercase;
+      color: var(--fg);
+    }
+
+    /* ── ABOUT BTN ── */
+    .about-btn {
+      position: fixed; bottom: 36px; left: 40px; z-index: 200;
+      display: flex; align-items: center; gap: 13px;
+      background: none; border: none; color: var(--fg); cursor: pointer;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.3px;
+    }
+    .about-btn .circle {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1.5px solid var(--fg-dim);
+      display: flex; align-items: center; justify-content: center; font-size: 15px;
+      transition: border-color .2s, background .2s;
+    }
+    .about-btn:hover .circle { border-color: var(--fg); background: rgba(128,128,128,0.1); }
+
+    /* ── TOGGLE ── */
+    .toggle-wrap { position: fixed; bottom: 36px; right: 40px; z-index: 200; }
+    .toggle {
+      width: 48px; height: 26px; background: rgba(128,128,128,0.2);
+      border-radius: 100px; border: none; cursor: pointer; position: relative;
+      transition: background .3s;
+    }
+    .toggle::after {
+      content: ''; position: absolute; top: 4px; right: 4px;
+      width: 18px; height: 18px; background: var(--fg);
+      border-radius: 50%; transition: transform .3s, background .3s;
+    }
+    html.light .toggle { background: rgba(0,0,0,0.15); }
+    html.light .toggle::after { transform: translateX(-22px); }
+
+    /* ── OVERLAY ── */
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+      z-index: 250; opacity: 0; pointer-events: none; transition: opacity .4s;
+    }
+    .overlay.show { opacity: 1; pointer-events: auto; }
+
+    /* ── PANEL ── */
+    .panel {
+      position: fixed; top: 0; right: 0;
+      width: min(600px,100vw); height: 100vh;
+      background: var(--panel-bg); color: var(--panel-fg);
+      z-index: 300;
+      transform: translateX(100%);
+      transition: transform .6s cubic-bezier(0.77,0,0.175,1);
+      overflow-y: auto; padding: 80px 56px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .panel.open { transform: translateX(0); }
+
+    .panel-close {
+      position: sticky; top: -80px;
+      margin: -80px -56px 52px;
+      padding: 28px 40px;
+      display: flex; justify-content: flex-end;
+      background: var(--panel-bg); z-index: 10;
+    }
+    .panel-close button {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      background: none; border: none; cursor: pointer; color: var(--panel-fg);
+    }
+
+    .panel h2 {
+      font-size: clamp(52px,8vw,76px); font-weight: 900;
+      letter-spacing: -3px; text-transform: uppercase; line-height: 0.88;
+      margin-bottom: 56px; color: var(--panel-fg);
+    }
+
+    .ps { margin-bottom: 36px; }
+    .ps-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--panel-num); margin-bottom: 12px;
+    }
+    .ps p { font-size: 16px; line-height: 1.78; color: var(--panel-p); }
+    .ps p + p { margin-top: 12px; }
+    .ps strong { color: var(--panel-fg); font-weight: 800; }
+
+    .divider { height: 1px; background: var(--panel-div); margin: 36px 0; }
+
+    .pillars { display: flex; flex-direction: column; gap: 18px; }
+    .pillar { display: flex; gap: 18px; align-items: flex-start; }
+    .p-num { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--panel-num); min-width: 36px; padding-top: 2px; }
+    .p-body h4 { font-size: 15px; font-weight: 800; margin-bottom: 3px; color: var(--panel-fg); }
+    .p-body p  { font-size: 13px; color: var(--panel-sub); line-height: 1.6; }
+
+    .cta-form { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    .cta-form input, .cta-form textarea {
+      width: 100%; padding: 13px 16px;
+      border: 1.5px solid var(--input-border); border-radius: 8px;
+      font-size: 14px; font-family: inherit; color: var(--panel-fg);
+      background: transparent; transition: border-color .2s;
+    }
+    .cta-form input:focus, .cta-form textarea:focus { outline: none; border-color: var(--input-focus); }
+    .cta-form textarea { height: 96px; resize: vertical; }
+    .cta-submit {
+      background: var(--panel-fg); color: var(--panel-bg);
+      padding: 15px; border-radius: 8px; font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer;
+    }
+    .cta-note { font-size: 12px; color: var(--note-col); text-align: center; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">WABI<em>●</em>NO</div>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <span>( TRD )</span>
+    <span id="clock-trd">00:00</span>
+    <span style="opacity:0.25">·</span>
+    <span>( SGP )</span>
+    <span id="clock-sgp">00:00</span>
+  </div>
+
+  <!-- SCREEN -->
+  <div class="screen">
+
+    <!-- RING VISUAL -->
+    <div class="ring-wrap">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="tp-outer" d="M300,300 m-240,0 a240,240 0 1,1 480,0 a240,240 0 1,1 -480,0"/>
+          <path id="tp-mid"   d="M300,300 m-183,0 a183,183 0 1,1 366,0 a183,183 0 1,1 -366,0"/>
+          <path id="tp-inner" d="M300,300 m-128,0 a128,128 0 1,1 256,0 a128,128 0 1,1 -256,0"/>
+          <radialGradient id="cg" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color: var(--ring-glow)"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+
+        <circle cx="300" cy="300" r="280" fill="url(#cg)"/>
+
+        <!-- OUTER (CW) -->
+        <g class="r-outer">
+          <circle cx="300" cy="300" r="248" fill="none" style="stroke:var(--ring-track)" stroke-width="18"/>
+          <circle cx="300" cy="300" r="240" fill="none" style="stroke:var(--ring-stroke-lg)" stroke-width="1"/>
+          <circle cx="300" cy="300" r="256" fill="none" style="stroke:var(--ring-stroke-sm)" stroke-width="0.5"/>
+          <text font-size="12" font-weight="700" letter-spacing="9" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text)">
+            <textPath href="#tp-outer">AI OPERATIVSYSTEM  ●  AI OPERATIVSYSTEM  ●  </textPath>
+          </text>
+        </g>
+
+        <!-- MID (CCW) -->
+        <g class="r-mid">
+          <circle cx="300" cy="300" r="191" style="fill:var(--ring-fill-mid)"/>
+          <circle cx="300" cy="300" r="183" fill="none" style="stroke:var(--ring-stroke-mid)" stroke-width="1.5"/>
+          <circle cx="300" cy="300" r="198" fill="none" style="stroke:var(--ring-stroke-mi2)" stroke-width="0.5"/>
+          <text font-size="11" font-weight="700" letter-spacing="6" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text-mid)">
+            <textPath href="#tp-mid">KONTEKST  ●  DATA  ●  INTELLIGENS  ●  AUTOMATISERING  ●  BYGG  ●  </textPath>
+          </text>
+        </g>
+
+        <!-- INNER (CW) -->
+        <g class="r-inner">
+          <circle cx="300" cy="300" r="128" fill="none" style="stroke:var(--ring-stroke-in)" stroke-width="1.5"/>
+          <circle cx="300" cy="300" r="139" fill="none" style="stroke:var(--ring-stroke-in2)" stroke-width="0.5"/>
+          <text font-size="9.5" font-weight="600" letter-spacing="5" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text-dim)">
+            <textPath href="#tp-inner">WABI  ◆  NORGE  ◆  TRONDHEIM  ◆  WABI  ◆  NORGE  ◆  TRONDHEIM  ◆  </textPath>
+          </text>
+        </g>
+
+        <!-- STATIC -->
+        <circle cx="300" cy="300" r="72" style="fill:var(--center-fill);stroke:var(--ring-stroke-mid)" stroke-width="1.5"/>
+        <circle cx="300" cy="300" r="58" style="fill:var(--center-fill2);stroke:var(--ring-stroke-mi2)" stroke-width="1"/>
+        <text x="300" y="296" text-anchor="middle" font-size="20" font-weight="900" letter-spacing="-0.5" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--center-text)">AIOS</text>
+        <text x="300" y="313" text-anchor="middle" font-size="8.5" letter-spacing="3.5" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--center-text-dim)">WABI</text>
+      </svg>
+    </div>
+
+    <!-- HEADLINE -->
+    <div class="headline">
+      <h1>AI OPERATIV-<br>SYSTEMET<br>FOR NORSKE<br>BEDRIFTER.</h1>
+    </div>
+
+    <!-- HVA VI GJØR -->
+    <button class="about-btn" onclick="openPanel()">
+      Hva vi gjør
+      <span class="circle">→</span>
+    </button>
+
+    <!-- TOGGLE dark/light -->
+    <div class="toggle-wrap">
+      <button class="toggle" id="toggleBtn" onclick="toggleTheme()"></button>
+    </div>
+
+  </div>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay" onclick="closePanel()"></div>
+
+  <!-- PANEL -->
+  <div class="panel" id="panel">
+    <div class="panel-close"><button onclick="closePanel()">LUKK</button></div>
+
+    <h2>HVA VI<br>GJØR</h2>
+
+    <div class="ps">
+      <div class="ps-label">Verden er i ferd med å skifte</div>
+      <p>Vi er midt i det største skiftet i arbeidslivet siden internett. AI er ikke lenger et eksperiment, det er infrastruktur. Og akkurat som med internett: de som er tidlig ute bygger forsprang som er nesten umulig å ta igjen.</p>
+      <p>Men de fleste norske bedrifter bruker AI feil. De logger inn på ChatGPT, skriver noen e-poster, og tror de er i gang. Det er ikke det vi snakker om.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="ps">
+      <div class="ps-label">Problemet med norske SMB-er</div>
+      <p>80 prosent av kapasiteten i en typisk norsk bedrift går til drift og daglige oppgaver. Rapportering, oppfølging, koordinering. Arbeid som holder hjulene i gang, men som ikke vokser bedriften.</p>
+      <p>Det gir ikke rom for strategi og ikke tid til å bygge noe nytt. <strong>Bedriften vedlikeholdes. Den vokser ikke.</strong> Konkurrentene dine er i ferd med å løse akkurat dette problemet, og vinduet for å komme tidlig er åpent, men ikke lenge.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="ps">
+      <div class="ps-label">Hva AIOS faktisk er</div>
+      <p>AI Operating System er ikke et produkt du kjøper eller en app du laster ned. Det er en <strong>metodikk</strong>, en måte å bygge AI lag for lag rundt hele bedriften din, til systemet faktisk kjenner deg, forstår tallene, og kan handle på vegne av deg.</p>
+      <p>Ikke ChatGPT du logger inn på. Et fullt kontekstualisert arbeidsrom som vet hvem dere er, hva dere selger og hva målene er. Vi bygger det sammen med deg, tilpasset din bedrift og din bransje.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="ps">
+      <div class="ps-label">De fem lagene</div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="p-num">01</div>
+          <div class="p-body">
+            <h4>Kontekst</h4>
+            <p>AI lærer hvem dere er, hva dere selger og hva strategien er. Aldri mer å forklare seg fra scratch.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="p-num">02</div>
+          <div class="p-body">
+            <h4>Data</h4>
+            <p>Kobler til salg, annonser og analytics. AI vet nå ikke bare hvem dere er, men hvor dere er i forhold til målene.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="p-num">03</div>
+          <div class="p-body">
+            <h4>Intelligens</h4>
+            <p>Daglig brief. Alt som skjedde, hva som betyr noe. Uten at du løfter en finger.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="p-num">04</div>
+          <div class="p-body">
+            <h4>Automatisering</h4>
+            <p>Oppgave for oppgave fjernes fra tallerkenen din. Mer og mer kjøres automatisk.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="p-num">05</div>
+          <div class="p-body">
+            <h4>Bygg</h4>
+            <p>Med frigjort kapasitet jobber du på bedriften, ikke bare i den.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="ps">
+      <div class="ps-label">Ta det første steget</div>
+      <p>Vi tar en uforpliktende samtale om hvilke lag som gir mest effekt for din bedrift.</p>
+      <div class="cta-form">
+        <input type="text" placeholder="Navn og bedrift" />
+        <input type="email" placeholder="E-post" />
+        <textarea placeholder="Hva er den største tidstyven i bedriften din i dag?"></textarea>
+        <button class="cta-submit">Send melding →</button>
+        <p class="cta-note">Vi svarer innen én arbeidsdag. Ingen forpliktelser.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateClock() {
+      const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
+      document.getElementById('clock-trd').textContent = new Date().toLocaleTimeString('no-NO', { ...opts, timeZone: 'Europe/Oslo' });
+      document.getElementById('clock-sgp').textContent = new Date().toLocaleTimeString('en-SG', { ...opts, timeZone: 'Asia/Singapore' });
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('light');
+    }
+
+    function openPanel() {
+      document.getElementById('panel').classList.add('open');
+      document.getElementById('overlay').classList.add('show');
+    }
+    function closePanel() {
+      document.getElementById('panel').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>
