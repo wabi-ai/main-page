@@ -456,7 +456,7 @@
     <div class="ps">
       <div class="ps-label">Ta det første steget</div>
       <p>Vi tar en uforpliktende samtale om hvilke lag som gir mest effekt for din bedrift.</p>
-      <form class="cta-form" action="https://formspree.io/admin@wabi.no" method="POST">
+      <form class="cta-form" onsubmit="sendMail(event)">
         <input type="text" name="navn" placeholder="Navn og bedrift" required />
         <input type="email" name="email" placeholder="E-post" required />
         <textarea name="melding" placeholder="Hva er den største tidstyven i bedriften din i dag?"></textarea>
@@ -468,6 +468,16 @@
   </div>
 
   <script>
+    function sendMail(e) {
+      e.preventDefault();
+      const navn = e.target.navn.value;
+      const email = e.target.email.value;
+      const melding = e.target.melding.value;
+      const subject = encodeURIComponent('Henvendelse fra ' + navn);
+      const body = encodeURIComponent('Navn og bedrift: ' + navn + '\nE-post: ' + email + '\n\nMelding:\n' + melding);
+      window.location.href = 'mailto:admin@wabi.no?subject=' + subject + '&body=' + body;
+    }
+
     function updateClock() {
       const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
       document.getElementById('clock-trd').textContent = new Date().toLocaleTimeString('no-NO', { ...opts, timeZone: 'Europe/Oslo' });
