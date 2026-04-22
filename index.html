@@ -384,7 +384,7 @@
   <div class="panel" id="panel">
     <div class="panel-close"><button onclick="closePanel()">LUKK</button></div>
 
-    <h2>HVA VI<br>GJØR</h2>
+    <h2>HVA VI GJØR</h2>
 
     <div class="ps">
       <div class="ps-label">Verden er i ferd med å skifte</div>
@@ -403,8 +403,8 @@
     <div class="divider"></div>
 
     <div class="ps">
-      <div class="ps-label">Hva AIOS faktisk er</div>
-      <p>AI Operating System er ikke et produkt du kjøper eller en app du laster ned. Det er en <strong>metodikk</strong>, en måte å bygge AI lag for lag rundt hele bedriften din, til systemet faktisk kjenner deg, forstår tallene, og kan handle på vegne av deg.</p>
+      <div class="ps-label">Hva ADS faktisk er</div>
+      <p>AI Driftssystem er ikke et produkt du kjøper eller en app du laster ned. Det er en <strong>metodikk</strong>, en måte å bygge AI lag for lag rundt hele bedriften din, til systemet faktisk kjenner deg, forstår tallene, og kan handle på vegne av deg.</p>
       <p>Ikke ChatGPT du logger inn på. Et fullt kontekstualisert arbeidsrom som vet hvem dere er, hva dere selger og hva målene er. Vi bygger det sammen med deg, tilpasset din bedrift og din bransje.</p>
     </div>
 
@@ -456,13 +456,13 @@
     <div class="ps">
       <div class="ps-label">Ta det første steget</div>
       <p>Vi tar en uforpliktende samtale om hvilke lag som gir mest effekt for din bedrift.</p>
-      <div class="cta-form">
-        <input type="text" placeholder="Navn og bedrift" />
-        <input type="email" placeholder="E-post" />
-        <textarea placeholder="Hva er den største tidstyven i bedriften din i dag?"></textarea>
-        <button class="cta-submit">Send melding →</button>
+      <form class="cta-form" action="https://formspree.io/admin@wabi.no" method="POST">
+        <input type="text" name="navn" placeholder="Navn og bedrift" required />
+        <input type="email" name="email" placeholder="E-post" required />
+        <textarea name="melding" placeholder="Hva er den største tidstyven i bedriften din i dag?"></textarea>
+        <button type="submit" class="cta-submit">Send melding →</button>
         <p class="cta-note">Vi svarer innen én arbeidsdag. Ingen forpliktelser.</p>
-      </div>
+      </form>
     </div>
 
   </div>
