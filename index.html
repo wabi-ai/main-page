@@ -199,9 +199,9 @@
     }
 
     .panel h2 {
-      font-size: clamp(52px,8vw,76px); font-weight: 900;
-      letter-spacing: -3px; text-transform: uppercase; line-height: 0.88;
-      margin-bottom: 56px; color: var(--panel-fg);
+      font-size: clamp(36px,5.5vw,58px); font-weight: 900;
+      letter-spacing: -2px; text-transform: uppercase; line-height: 0.92;
+      white-space: nowrap; margin-bottom: 56px; color: var(--panel-fg);
     }
 
     .ps { margin-bottom: 36px; }
@@ -221,21 +221,15 @@
     .p-body h4 { font-size: 15px; font-weight: 800; margin-bottom: 3px; color: var(--panel-fg); }
     .p-body p  { font-size: 13px; color: var(--panel-sub); line-height: 1.6; }
 
-    .cta-form { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
-    .cta-form input, .cta-form textarea {
-      width: 100%; padding: 13px 16px;
-      border: 1.5px solid var(--input-border); border-radius: 8px;
-      font-size: 14px; font-family: inherit; color: var(--panel-fg);
-      background: transparent; transition: border-color .2s;
-    }
-    .cta-form input:focus, .cta-form textarea:focus { outline: none; border-color: var(--input-focus); }
-    .cta-form textarea { height: 96px; resize: vertical; }
-    .cta-submit {
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-top: 24px; padding: 18px 32px;
       background: var(--panel-fg); color: var(--panel-bg);
-      padding: 15px; border-radius: 8px; font-size: 15px; font-weight: 700;
-      border: none; cursor: pointer;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.3px;
+      font-family: inherit; border: none; border-radius: 8px; cursor: pointer;
+      text-decoration: none;
     }
-    .cta-note { font-size: 12px; color: var(--note-col); text-align: center; }
+    .cta-note { font-size: 12px; color: var(--note-col); margin-top: 14px; }
 
     /* ── TABLET / IPAD (600px – 1024px) ── */
     @media (min-width: 600px) and (max-width: 1024px) {
@@ -456,13 +450,8 @@
     <div class="ps">
       <div class="ps-label">Ta det første steget</div>
       <p>Vi tar en uforpliktende samtale om hvilke lag som gir mest effekt for din bedrift.</p>
-      <form class="cta-form" onsubmit="sendMail(event)">
-        <input type="text" name="navn" placeholder="Navn og bedrift" required />
-        <input type="email" name="email" placeholder="E-post" required />
-        <textarea name="melding" placeholder="Hva er den største tidstyven i bedriften din i dag?"></textarea>
-        <button type="submit" class="cta-submit">Send melding →</button>
-        <p class="cta-note">Vi svarer innen én arbeidsdag. Ingen forpliktelser.</p>
-      </form>
+      <a class="cta-btn" href="mailto:admin@wabi.no?subject=Henvendelse%20fra%20wabi.no">Ta kontakt →</a>
+      <p class="cta-note">Vi svarer innen én arbeidsdag. Ingen forpliktelser.</p>
     </div>
 
   </div>
