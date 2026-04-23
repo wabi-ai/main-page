@@ -137,6 +137,11 @@
     @keyframes cw  { to { transform: rotate(360deg);  } }
     @keyframes ccw { to { transform: rotate(-360deg); } }
 
+    .center-btn { cursor: pointer; transition: fill .25s; }
+    .center-btn:hover { fill: rgba(232,255,87,0.10); }
+    .center-glow { transition: opacity .25s; opacity: 0; pointer-events: none; }
+    .center-btn:hover + .center-glow { opacity: 1; }
+
     /* ── HEADLINE ── */
     .headline {
       position: fixed; bottom: 88px; left: 40px; z-index: 200; max-width: 480px;
@@ -327,7 +332,7 @@
           <circle cx="300" cy="300" r="240" fill="none" style="stroke:var(--ring-stroke-lg)" stroke-width="1"/>
           <circle cx="300" cy="300" r="256" fill="none" style="stroke:var(--ring-stroke-sm)" stroke-width="0.5"/>
           <text font-size="12" font-weight="700" letter-spacing="9" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text)">
-            <textPath href="#tp-outer">AI DRIFTSSYSTEM  ●  AI DRIFTSSYSTEM  ●  AI DRIFTSSYSTEM  ●  </textPath>
+            <textPath href="#tp-outer">AI DRIFTSSYSTEM · FOR NORSKE BEDRIFTER · AI DRIFTSSYSTEM · FOR NORSKE BEDRIFTER · </textPath>
           </text>
         </g>
 
@@ -337,7 +342,7 @@
           <circle cx="300" cy="300" r="183" fill="none" style="stroke:var(--ring-stroke-mid)" stroke-width="1.5"/>
           <circle cx="300" cy="300" r="198" fill="none" style="stroke:var(--ring-stroke-mi2)" stroke-width="0.5"/>
           <text font-size="11" font-weight="700" letter-spacing="6" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text-mid)">
-            <textPath href="#tp-mid">KONTEKST  ●  DATA  ●  INTELLIGENS  ●  AUTOMATISERING  ●  BYGG  ●  </textPath>
+            <textPath href="#tp-mid">KONTEKST · DATA · INTELLIGENS · AUTOMATISERING · AI · KONTEKST · DATA · INTELLIGENS · AUTOMATISERING · AI · </textPath>
           </text>
         </g>
 
@@ -346,14 +351,15 @@
           <circle cx="300" cy="300" r="128" fill="none" style="stroke:var(--ring-stroke-in)" stroke-width="1.5"/>
           <circle cx="300" cy="300" r="139" fill="none" style="stroke:var(--ring-stroke-in2)" stroke-width="0.5"/>
           <text font-size="9.5" font-weight="600" letter-spacing="5" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text-dim)">
-            <textPath href="#tp-inner">WABI  ◆  NORGE  ◆  TRONDHEIM  ◆  WABI  ◆  NORGE  ◆  TRONDHEIM  ◆  </textPath>
+            <textPath href="#tp-inner">WABI · TRONDHEIM · SINGAPORE · WABI · TRONDHEIM · SINGAPORE · </textPath>
           </text>
         </g>
 
         <!-- STATIC -->
         <circle cx="300" cy="300" r="72" style="fill:rgba(6,6,6,0.96);stroke:var(--ring-stroke-mid)" stroke-width="1.5"/>
         <circle cx="300" cy="300" r="58" style="fill:rgba(8,8,8,0.98);stroke:var(--ring-stroke-mi2)" stroke-width="1"/>
-        <circle cx="300" cy="300" r="70" fill="transparent" style="cursor:pointer" onclick="openPanel()"/>
+        <circle cx="300" cy="300" r="70" fill="transparent" class="center-btn" onclick="openPanel()"/>
+        <circle cx="300" cy="300" r="70" fill="none" stroke="#e8ff57" stroke-width="1.5" class="center-glow"/>
         <g transform="translate(262, 278) scale(0.076)" style="pointer-events:none">
           <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="rgba(255,255,255,0.9)"/>
           <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="rgba(255,255,255,0.9)"/>
