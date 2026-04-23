@@ -150,17 +150,15 @@
     /* ── ABOUT BTN ── */
     .about-btn {
       position: fixed; bottom: 36px; left: 40px; z-index: 200;
-      display: flex; align-items: center; gap: 13px;
-      background: none; border: none; color: var(--fg); cursor: pointer;
-      font-size: 14px; font-weight: 600; letter-spacing: 0.3px;
+      display: flex; align-items: center; gap: 10px;
+      background: #e8ff57; color: #080808; cursor: pointer;
+      font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; border-radius: 100px; padding: 14px 24px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 0 0 rgba(232,255,87,0);
     }
-    .about-btn .circle {
-      width: 34px; height: 34px; border-radius: 50%;
-      border: 1.5px solid var(--fg-dim);
-      display: flex; align-items: center; justify-content: center; font-size: 15px;
-      transition: border-color .2s, background .2s;
-    }
-    .about-btn:hover .circle { border-color: var(--fg); background: rgba(128,128,128,0.1); }
+    .about-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(232,255,87,0.25); }
+    .about-btn .circle { font-size: 15px; line-height: 1; }
 
     /* ── TOGGLE ── */
     .toggle-wrap { position: fixed; bottom: 36px; right: 40px; z-index: 200; }
@@ -355,7 +353,8 @@
         <!-- STATIC -->
         <circle cx="300" cy="300" r="72" style="fill:rgba(6,6,6,0.96);stroke:var(--ring-stroke-mid)" stroke-width="1.5"/>
         <circle cx="300" cy="300" r="58" style="fill:rgba(8,8,8,0.98);stroke:var(--ring-stroke-mi2)" stroke-width="1"/>
-        <g transform="translate(262, 278) scale(0.076)">
+        <circle cx="300" cy="300" r="70" fill="transparent" style="cursor:pointer" onclick="openPanel()"/>
+        <g transform="translate(262, 278) scale(0.076)" style="pointer-events:none">
           <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="rgba(255,255,255,0.9)"/>
           <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="rgba(255,255,255,0.9)"/>
           <path d="M566.619 0H423.181C419.75 0 417.339 3.37558 418.451 6.62077L537.853 355.078C539.375 359.521 545.628 359.604 547.268 355.204L621.975 154.778C622.378 153.695 622.394 152.506 622.02 151.412L571.35 3.38076C570.658 1.35858 568.757 0 566.619 0Z" fill="rgba(255,255,255,0.9)"/>
@@ -392,25 +391,25 @@
     <h2>HVA VI GJØR</h2>
 
     <div class="ps">
-      <div class="ps-label">Verden er i ferd med å skifte</div>
-      <p>Vi er midt i det største skiftet i arbeidslivet siden internett. AI er ikke lenger et eksperiment, det er infrastruktur. Og akkurat som med internett: de som er tidlig ute bygger forsprang som er nesten umulig å ta igjen.</p>
-      <p>Men de fleste norske bedrifter bruker AI feil. De logger inn på ChatGPT, skriver noen e-poster, og tror de er i gang. Det er ikke det vi snakker om.</p>
+      <div class="ps-label">Du er lei av svada</div>
+      <p>Du har vært på kursene. Du har lest artiklene. Du vet at AI er viktig — og du er sannsynligvis ganske lei av å høre om det.</p>
+      <p>Det vi hører fra norske ledere nå handler ikke om at de ikke tror på AI. Det handler om at <strong>ingenting av det de har prøvd faktisk har satt seg.</strong> Prompting er ikke en strategi. Et ChatGPT-abonnement er ikke et system.</p>
     </div>
 
     <div class="divider"></div>
 
     <div class="ps">
-      <div class="ps-label">Problemet med norske SMB-er</div>
-      <p>80 prosent av kapasiteten i en typisk norsk bedrift går til drift og daglige oppgaver. Rapportering, oppfølging, koordinering. Arbeid som holder hjulene i gang, men som ikke vokser bedriften.</p>
-      <p>Det gir ikke rom for strategi og ikke tid til å bygge noe nytt. <strong>Bedriften vedlikeholdes. Den vokser ikke.</strong> Konkurrentene dine er i ferd med å løse akkurat dette problemet, og vinduet for å komme tidlig er åpent, men ikke lenge.</p>
+      <div class="ps-label">Problemet er implementering</div>
+      <p>Gapet mellom å bruke AI og å drive med AI er enormt. De fleste bedrifter er fast i det første stadiet — enkeltpersoner som bruker verktøy sporadisk, uten kontekst, uten kobling til resten av driften.</p>
+      <p>Det gir ikke frigjort kapasitet. <strong>Det gir bare enda et verktøy å forholde seg til.</strong></p>
     </div>
 
     <div class="divider"></div>
 
     <div class="ps">
-      <div class="ps-label">Hva ADS faktisk er</div>
-      <p>AI Driftssystem er ikke et produkt du kjøper eller en app du laster ned. Det er en <strong>metodikk</strong>, en måte å bygge AI lag for lag rundt hele bedriften din, til systemet faktisk kjenner deg, forstår tallene, og kan handle på vegne av deg.</p>
-      <p>Ikke ChatGPT du logger inn på. Et fullt kontekstualisert arbeidsrom som vet hvem dere er, hva dere selger og hva målene er. Vi bygger det sammen med deg, tilpasset din bedrift og din bransje.</p>
+      <div class="ps-label">Hva vi faktisk gjør</div>
+      <p>Vi bygger ikke kurs. Vi bygger ikke en app du logger inn på.</p>
+      <p>Vi setter opp et AI Driftssystem — lag for lag, rundt hele bedriften din. Et system som kjenner din bedrift, forstår tallene dine, og over tid kan handle på vegne av deg. <strong>Ikke teoretisk. I praksis, i din hverdag.</strong></p>
     </div>
 
     <div class="divider"></div>
