@@ -283,9 +283,78 @@
       .toggle-wrap { bottom: 20px; }
       .ticker { display: none; }
     }
+
+    /* ── LOADER ── */
+    .loader {
+      position: fixed; inset: 0; z-index: 2000;
+      background: #080808;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.7s ease;
+    }
+    .loader.out { opacity: 0; pointer-events: none; }
+    .loader-svg {
+      width: min(480px, 72vmin);
+      height: min(480px, 72vmin);
+    }
+    .l-center {
+      transform-box: view-box;
+      transform-origin: 300px 300px;
+      animation: centerSpin 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    }
+    .l-inner {
+      transform-box: view-box; transform-origin: 300px 300px;
+      animation: ringExpand 0.5s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay: 0.65s;
+    }
+    .l-mid {
+      transform-box: view-box; transform-origin: 300px 300px;
+      animation: ringExpand 0.5s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay: 0.85s;
+    }
+    .l-outer {
+      transform-box: view-box; transform-origin: 300px 300px;
+      animation: ringExpand 0.5s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay: 1.05s;
+    }
+    @keyframes centerSpin {
+      from { transform: rotate(-360deg) scale(0); opacity: 0; }
+      to   { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    @keyframes ringExpand {
+      from { transform: scale(0.7); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- LOADER -->
+  <div id="loader" class="loader">
+    <svg class="loader-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <g class="l-outer">
+        <circle cx="300" cy="300" r="248" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="18"/>
+        <circle cx="300" cy="300" r="240" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+        <circle cx="300" cy="300" r="256" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+      </g>
+      <g class="l-mid">
+        <circle cx="300" cy="300" r="191" fill="rgba(255,255,255,0.018)"/>
+        <circle cx="300" cy="300" r="183" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+      </g>
+      <g class="l-inner">
+        <circle cx="300" cy="300" r="128" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+      </g>
+      <g class="l-center">
+        <circle cx="300" cy="300" r="72" fill="rgba(6,6,6,0.96)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="300" cy="300" r="58" fill="rgba(8,8,8,0.98)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+        <g transform="translate(262, 278) scale(0.076)">
+          <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="rgba(255,255,255,0.9)"/>
+          <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="rgba(255,255,255,0.9)"/>
+          <path d="M566.619 0H423.181C419.75 0 417.339 3.37558 418.451 6.62077L537.853 355.078C539.375 359.521 545.628 359.604 547.268 355.204L621.975 154.778C622.378 153.695 622.394 152.506 622.02 151.412L571.35 3.38076C570.658 1.35858 568.757 0 566.619 0Z" fill="rgba(255,255,255,0.9)"/>
+          <path d="M990.812 0H848.531C846.443 0 844.575 1.29718 843.846 3.25343L627.253 584.253C626.035 587.521 628.451 591 631.938 591H775.271C777.361 591 779.231 589.699 779.958 587.739L995.5 6.7391C996.712 3.47306 994.296 0 990.812 0Z" fill="rgba(255,255,255,0.9)"/>
+        </g>
+      </g>
+    </svg>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -474,6 +543,15 @@
   </div>
 
   <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loader').classList.add('out');
+        setTimeout(function() {
+          document.getElementById('loader').style.display = 'none';
+        }, 750);
+      }, 1700);
+    });
+
     function sendMail(e) {
       e.preventDefault();
       const navn = e.target.navn.value;
