@@ -26,7 +26,7 @@
       --fg:              #ffffff;
       --fg-dim:          rgba(255,255,255,0.35);
       --fg-mid:          rgba(255,255,255,0.55);
-      --ring-glow:       rgba(232,255,87,0.05);
+      --ring-glow:       rgba(62,87,67,0.05);
       --ring-track:      rgba(255,255,255,0.05);
       --ring-stroke-lg:  rgba(255,255,255,0.13);
       --ring-stroke-sm:  rgba(255,255,255,0.06);
@@ -138,9 +138,11 @@
     @keyframes ccw { to { transform: rotate(-360deg); } }
 
     .center-btn { cursor: pointer; transition: fill .25s; }
-    .center-btn:hover { fill: rgba(232,255,87,0.10); }
+    .center-btn:hover { fill: rgba(62,87,67,0.10); }
     .center-glow { transition: opacity .25s; opacity: 0; pointer-events: none; }
     .center-btn:hover + .center-glow { opacity: 1; }
+    .center-logo { color: rgba(255,255,255,0.9); transition: color .4s; }
+    html.light .center-logo { color: rgba(0,0,0,0.9); }
 
     /* ── HEADLINE ── */
     .headline {
@@ -156,13 +158,13 @@
     .about-btn {
       position: fixed; bottom: 36px; left: 40px; z-index: 200;
       display: flex; align-items: center; gap: 10px;
-      background: #e8ff57; color: #080808; cursor: pointer;
+      background: #3e5743; color: #ffffff; cursor: pointer;
       font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
       border: none; border-radius: 100px; padding: 14px 24px;
       transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 0 0 0 rgba(232,255,87,0);
+      box-shadow: 0 0 0 0 rgba(62,87,67,0);
     }
-    .about-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(232,255,87,0.25); }
+    .about-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(62,87,67,0.35); }
     .about-btn .circle { font-size: 15px; line-height: 1; }
 
     /* ── TOGGLE ── */
@@ -220,8 +222,8 @@
 
     .ps { margin-bottom: 36px; }
     .ps-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--panel-num); margin-bottom: 12px;
+      font-size: 16px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--panel-fg); margin-bottom: 12px;
     }
     .ps p { font-size: 16px; line-height: 1.78; color: var(--panel-p); }
     .ps p + p { margin-top: 12px; }
@@ -505,15 +507,15 @@
         </g>
 
         <!-- STATIC -->
-        <circle cx="300" cy="300" r="72" style="fill:rgba(6,6,6,0.96);stroke:var(--ring-stroke-mid)" stroke-width="1.5"/>
-        <circle cx="300" cy="300" r="58" style="fill:rgba(8,8,8,0.98);stroke:var(--ring-stroke-mi2)" stroke-width="1"/>
+        <circle cx="300" cy="300" r="72" style="fill:var(--center-fill);stroke:var(--ring-stroke-mid);transition:fill .4s" stroke-width="1.5"/>
+        <circle cx="300" cy="300" r="58" style="fill:var(--center-fill2);stroke:var(--ring-stroke-mi2);transition:fill .4s" stroke-width="1"/>
         <circle cx="300" cy="300" r="70" fill="transparent" class="center-btn" onclick="openPanel()"/>
-        <circle cx="300" cy="300" r="70" fill="none" stroke="#e8ff57" stroke-width="1.5" class="center-glow"/>
-        <g transform="translate(262, 278) scale(0.076)" style="pointer-events:none">
-          <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="rgba(255,255,255,0.9)"/>
-          <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="rgba(255,255,255,0.9)"/>
-          <path d="M566.619 0H423.181C419.75 0 417.339 3.37558 418.451 6.62077L537.853 355.078C539.375 359.521 545.628 359.604 547.268 355.204L621.975 154.778C622.378 153.695 622.394 152.506 622.02 151.412L571.35 3.38076C570.658 1.35858 568.757 0 566.619 0Z" fill="rgba(255,255,255,0.9)"/>
-          <path d="M990.812 0H848.531C846.443 0 844.575 1.29718 843.846 3.25343L627.253 584.253C626.035 587.521 628.451 591 631.938 591H775.271C777.361 591 779.231 589.699 779.958 587.739L995.5 6.7391C996.712 3.47306 994.296 0 990.812 0Z" fill="rgba(255,255,255,0.9)"/>
+        <circle cx="300" cy="300" r="70" fill="none" stroke="#3e5743" stroke-width="1.5" class="center-glow"/>
+        <g transform="translate(262, 278) scale(0.076)" style="pointer-events:none" class="center-logo">
+          <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="currentColor"/>
+          <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="currentColor"/>
+          <path d="M566.619 0H423.181C419.75 0 417.339 3.37558 418.451 6.62077L537.853 355.078C539.375 359.521 545.628 359.604 547.268 355.204L621.975 154.778C622.378 153.695 622.394 152.506 622.02 151.412L571.35 3.38076C570.658 1.35858 568.757 0 566.619 0Z" fill="currentColor"/>
+          <path d="M990.812 0H848.531C846.443 0 844.575 1.29718 843.846 3.25343L627.253 584.253C626.035 587.521 628.451 591 631.938 591H775.271C777.361 591 779.231 589.699 779.958 587.739L995.5 6.7391C996.712 3.47306 994.296 0 990.812 0Z" fill="currentColor"/>
         </g>
       </svg>
     </div>
@@ -653,35 +655,35 @@
       <div class="ps-label">De fem lagene</div>
       <div class="pillars">
         <div class="pillar">
-          <div class="p-num">01</div>
+          <div class="p-num">1</div>
           <div class="p-body">
             <h4>Kontekst</h4>
             <p>AI lærer hvem dere er, hva dere selger og hva strategien er. Aldri mer å forklare seg fra scratch.</p>
           </div>
         </div>
         <div class="pillar">
-          <div class="p-num">02</div>
+          <div class="p-num">2</div>
           <div class="p-body">
             <h4>Data</h4>
             <p>Vi kobler deg til alle verktøyene og systemene du allerede bruker. Ikke bare for å lese data, men for å faktisk utføre oppgaver i dem på dine vegne.</p>
           </div>
         </div>
         <div class="pillar">
-          <div class="p-num">03</div>
+          <div class="p-num">3</div>
           <div class="p-body">
             <h4>Intelligens</h4>
             <p>Daglig brief. Alt som skjedde, hva som betyr noe. Uten at du løfter en finger.</p>
           </div>
         </div>
         <div class="pillar">
-          <div class="p-num">04</div>
+          <div class="p-num">4</div>
           <div class="p-body">
             <h4>Automatisering</h4>
             <p>Oppgave for oppgave fjernes fra tallerkenen din. Mer og mer kjøres automatisk.</p>
           </div>
         </div>
         <div class="pillar">
-          <div class="p-num">05</div>
+          <div class="p-num">5</div>
           <div class="p-body">
             <h4>Bygg</h4>
             <p>Med frigjort kapasitet jobber du på bedriften, ikke bare i den.</p>
