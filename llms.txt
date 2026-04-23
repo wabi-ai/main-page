@@ -1,0 +1,33 @@
+# WABI
+
+> WABI bygger AI Driftssystem for norske bedrifter. Vi er en metodikk, ikke en app. Vi hjelper små og mellomstore bedrifter med å bygge AI lag for lag, tilpasset deres kontekst, verktøy og mål, slik at bedriften kan vokse istedenfor å bare vedlikeholdes.
+
+WABI holder til i Trondheim og Singapore. Vi jobber primært med norske bedrifter i vekstfase, typisk 30 til 150 ansatte, som har forstått at AI er infrastruktur og ikke et eksperiment, men som trenger hjelp til å bygge det skikkelig.
+
+## Hva vi gjør
+
+AI Driftssystem er et fullt kontekstualisert arbeidsrom som kjenner bedriften, tallene og målene. Det er ikke ChatGPT med ny logo. Vi bygger det sammen med kunden gjennom fem lag:
+
+1. Kontekst: AI lærer hvem bedriften er, hva den selger og hva strategien er.
+2. Data: Vi kobler bedriften til alle verktøyene og systemene den allerede bruker. Ikke bare for å lese data, men for å faktisk utføre oppgaver i dem, sende epost, oppdatere CRM, sette i gang annonser, hente tall fra regnskapet og klargjøre presentasjoner.
+3. Intelligens: Daglig brief. Alt som skjedde, hva som betyr noe, hva som krever handling.
+4. Automatisering: Oppgave for oppgave fjernes fra tallerkenen og kjøres automatisk. Enkelt nok til å sette i gang fra telefonen.
+5. Bygg: Med frigjort kapasitet jobber ledelsen på bedriften, ikke bare i den.
+
+## Hva som skiller oss
+
+Vi tror på å kunne jobbe mer uten å være foran laptopen. En leder skal kunne sette i gang oppgaver fra telefonen, gi en instruksjon og komme tilbake til en ferdig utført oppgave. Graden og enkelheten i automatisering er kjernen i det vi bygger.
+
+Målet vi måler mot er økt omsetning per ansatt. Det er indikatoren som beveger seg når et AI Driftssystem faktisk virker.
+
+## Hvem vi jobber med
+
+Norske SMB-er som kjenner at 80 prosent av kapasiteten går til drift, rapportering og koordinering, og at det ikke er rom for å bygge noe nytt. Daglige ledere og operasjonelle ledere som vil ha praktisk AI-implementering som faktisk gir verdi, ikke kurs og prompting-workshops.
+
+## Kontakt
+
+admin@wabi.no. Vi tar uforpliktende samtaler om hvilke lag som gir mest effekt for den enkelte bedrift. Svar innen én arbeidsdag.
+
+## Sider
+
+- [Hovedside](https://wabi.no): AI Driftssystem for norske bedrifter
