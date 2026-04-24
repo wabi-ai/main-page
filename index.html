@@ -117,7 +117,7 @@
 
     /* ── TICKER ── */
     .ticker {
-      position: fixed; top: 31px; left: 50%; transform: translateX(-50%);
+      position: fixed; top: 31px; right: 40px;
       font-size: 12px; font-weight: 500; letter-spacing: 2px;
       color: var(--fg-dim); z-index: 200; display: flex; gap: 10px; white-space: nowrap;
     }
@@ -144,15 +144,6 @@
     .center-logo { color: rgba(255,255,255,0.9); transition: color .4s; }
     html.light .center-logo { color: rgba(0,0,0,0.9); }
 
-    /* ── HEADLINE ── */
-    .headline {
-      position: fixed; bottom: 116px; left: 40px; z-index: 200; max-width: 480px;
-    }
-    .headline h1 {
-      font-size: clamp(28px, 4vw, 54px);
-      font-weight: 900; line-height: 0.94; letter-spacing: -1.5px; text-transform: uppercase;
-      color: var(--fg);
-    }
 
     /* ── ABOUT BTN ── */
     .about-btn {
@@ -160,7 +151,7 @@
       display: flex; align-items: center; gap: 10px;
       background: #3e5743; color: #ffffff; cursor: pointer;
       font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
-      border: none; border-radius: 100px; padding: 14px 24px;
+      border: none; border-radius: 8px; padding: 14px 24px;
       transition: transform .2s, box-shadow .2s;
       box-shadow: 0 0 0 0 rgba(62,87,67,0);
     }
@@ -233,14 +224,14 @@
 
     .pillars { display: flex; flex-direction: column; gap: 18px; }
     .pillar { display: flex; gap: 18px; align-items: flex-start; }
-    .p-num { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--panel-num); min-width: 36px; padding-top: 2px; }
+    .p-num { font-size: 15px; font-weight: 800; letter-spacing: 0; color: var(--panel-fg); min-width: 24px; padding-top: 1px; }
     .p-body h4 { font-size: 15px; font-weight: 800; margin-bottom: 3px; color: var(--panel-fg); }
     .p-body p  { font-size: 13px; color: var(--panel-sub); line-height: 1.6; }
 
     .cta-btn {
       display: inline-flex; align-items: center; gap: 12px;
       margin-top: 24px; padding: 18px 32px;
-      background: var(--panel-fg); color: var(--panel-bg);
+      background: #3e5743; color: #ffffff;
       font-size: 15px; font-weight: 700; letter-spacing: 0.3px;
       font-family: inherit; border: none; border-radius: 8px; cursor: pointer;
       text-decoration: none;
@@ -252,8 +243,6 @@
       nav { padding: 24px 32px; }
       .ticker { top: 27px; font-size: 11px; }
       .ring-wrap { width: min(600px,80vmin); height: min(600px,80vmin); }
-      .headline { bottom: 92px; left: 32px; }
-      .headline h1 { font-size: clamp(28px,4.5vw,48px); }
       .about-btn { bottom: 36px; left: 32px; }
       .toggle-wrap { bottom: 36px; right: 32px; }
       .panel { width: min(560px,100vw); padding: 80px 40px; }
@@ -265,8 +254,6 @@
       nav { padding: 20px 24px; }
       .ticker { top: 22px; font-size: 10px; letter-spacing: 1px; gap: 6px; }
       .ring-wrap { top: 43%; width: min(420px,78vmin); height: min(420px,78vmin); }
-      .headline { bottom: 100px; left: 24px; max-width: calc(100vw - 48px); }
-      .headline h1 { font-size: clamp(24px,7.5vw,36px); letter-spacing: -1px; }
       .about-btn { bottom: 44px; left: 24px; font-size: 13px; }
       .toggle-wrap { bottom: 44px; right: 24px; }
       .panel { padding: 70px 24px; }
@@ -279,8 +266,6 @@
     /* ── LANDSCAPE PHONE ── */
     @media (max-height: 500px) and (orientation: landscape) {
       .ring-wrap { top: 50%; width: min(360px,65vh); height: min(360px,65vh); }
-      .headline { bottom: 64px; }
-      .headline h1 { font-size: clamp(18px,4vh,28px); }
       .about-btn { bottom: 20px; }
       .toggle-wrap { bottom: 20px; }
       .ticker { display: none; }
@@ -371,32 +356,34 @@
       position: fixed; inset: 0; z-index: 2000;
       background: #080808;
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.7s ease;
+      transition: opacity 1.2s ease;
     }
     .loader.out { opacity: 0; pointer-events: none; }
     .loader-svg {
       width: min(480px, 72vmin);
       height: min(480px, 72vmin);
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    .loader.out .loader-svg { transform: scale(2.4); }
     .l-center {
       transform-box: view-box;
       transform-origin: 300px 300px;
-      animation: centerSpin 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+      animation: centerSpin 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) both;
     }
     .l-inner {
       transform-box: view-box; transform-origin: 300px 300px;
-      animation: ringExpand 0.5s cubic-bezier(0.22,1,0.36,1) both;
-      animation-delay: 0.65s;
+      animation: ringExpand 0.35s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay: 0.4s;
     }
     .l-mid {
       transform-box: view-box; transform-origin: 300px 300px;
-      animation: ringExpand 0.5s cubic-bezier(0.22,1,0.36,1) both;
-      animation-delay: 0.85s;
+      animation: ringExpand 0.35s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay: 0.55s;
     }
     .l-outer {
       transform-box: view-box; transform-origin: 300px 300px;
-      animation: ringExpand 0.5s cubic-bezier(0.22,1,0.36,1) both;
-      animation-delay: 1.05s;
+      animation: ringExpand 0.35s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay: 0.7s;
     }
     @keyframes centerSpin {
       from { transform: rotate(-360deg) scale(0); opacity: 0; }
@@ -414,9 +401,8 @@
   <div id="loader" class="loader">
     <svg class="loader-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g class="l-outer">
-        <circle cx="300" cy="300" r="248" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="18"/>
-        <circle cx="300" cy="300" r="240" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
-        <circle cx="300" cy="300" r="256" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <circle cx="300" cy="300" r="248" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+        <circle cx="300" cy="300" r="256" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
       </g>
       <g class="l-mid">
         <circle cx="300" cy="300" r="191" fill="rgba(255,255,255,0.018)"/>
@@ -440,7 +426,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="logo">
+    <div class="logo" onclick="openPanel()" style="cursor:pointer;">
       <svg viewBox="0 0 996 591" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="currentColor"/>
         <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="currentColor"/>
@@ -462,74 +448,8 @@
   <!-- SCREEN -->
   <div class="screen">
 
-    <!-- RING VISUAL -->
-    <div class="ring-wrap">
-      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <path id="tp-outer" d="M300,300 m-240,0 a240,240 0 1,1 480,0 a240,240 0 1,1 -480,0"/>
-          <path id="tp-mid"   d="M300,300 m-183,0 a183,183 0 1,1 366,0 a183,183 0 1,1 -366,0"/>
-          <path id="tp-inner" d="M300,300 m-128,0 a128,128 0 1,1 256,0 a128,128 0 1,1 -256,0"/>
-          <radialGradient id="cg" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" style="stop-color: var(--ring-glow)"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-        </defs>
-
-        <circle cx="300" cy="300" r="280" fill="url(#cg)"/>
-
-        <!-- OUTER (CW) -->
-        <g class="r-outer">
-          <circle cx="300" cy="300" r="248" fill="none" style="stroke:var(--ring-track)" stroke-width="18"/>
-          <circle cx="300" cy="300" r="240" fill="none" style="stroke:var(--ring-stroke-lg)" stroke-width="1"/>
-          <circle cx="300" cy="300" r="256" fill="none" style="stroke:var(--ring-stroke-sm)" stroke-width="0.5"/>
-          <text font-size="12" font-weight="700" letter-spacing="9" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text)">
-            <textPath href="#tp-outer">AI DRIFTSSYSTEM · FOR NORSKE BEDRIFTER · AI DRIFTSSYSTEM · FOR NORSKE BEDRIFTER · </textPath>
-          </text>
-        </g>
-
-        <!-- MID (CCW) -->
-        <g class="r-mid">
-          <circle cx="300" cy="300" r="191" style="fill:var(--ring-fill-mid)"/>
-          <circle cx="300" cy="300" r="183" fill="none" style="stroke:var(--ring-stroke-mid)" stroke-width="1.5"/>
-          <circle cx="300" cy="300" r="198" fill="none" style="stroke:var(--ring-stroke-mi2)" stroke-width="0.5"/>
-          <text font-size="11" font-weight="700" letter-spacing="6" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text-mid)">
-            <textPath href="#tp-mid">KONTEKST · DATA · INTELLIGENS · AUTOMATISERING · AI · KONTEKST · DATA · INTELLIGENS · AUTOMATISERING · AI · </textPath>
-          </text>
-        </g>
-
-        <!-- INNER (CW) -->
-        <g class="r-inner">
-          <circle cx="300" cy="300" r="128" fill="none" style="stroke:var(--ring-stroke-in)" stroke-width="1.5"/>
-          <circle cx="300" cy="300" r="139" fill="none" style="stroke:var(--ring-stroke-in2)" stroke-width="0.5"/>
-          <text font-size="9.5" font-weight="600" letter-spacing="5" font-family="Montserrat,Helvetica Neue,Arial" style="fill:var(--ring-text-dim)">
-            <textPath href="#tp-inner">WABI · TRONDHEIM · SINGAPORE · WABI · TRONDHEIM · SINGAPORE · </textPath>
-          </text>
-        </g>
-
-        <!-- STATIC -->
-        <circle cx="300" cy="300" r="72" style="fill:var(--center-fill);stroke:var(--ring-stroke-mid);transition:fill .4s" stroke-width="1.5"/>
-        <circle cx="300" cy="300" r="58" style="fill:var(--center-fill2);stroke:var(--ring-stroke-mi2);transition:fill .4s" stroke-width="1"/>
-        <circle cx="300" cy="300" r="70" fill="transparent" class="center-btn" onclick="openPanel()"/>
-        <circle cx="300" cy="300" r="70" fill="none" stroke="#3e5743" stroke-width="1.5" class="center-glow"/>
-        <g transform="translate(262, 278) scale(0.076)" style="pointer-events:none" class="center-logo">
-          <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="currentColor"/>
-          <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="currentColor"/>
-          <path d="M566.619 0H423.181C419.75 0 417.339 3.37558 418.451 6.62077L537.853 355.078C539.375 359.521 545.628 359.604 547.268 355.204L621.975 154.778C622.378 153.695 622.394 152.506 622.02 151.412L571.35 3.38076C570.658 1.35858 568.757 0 566.619 0Z" fill="currentColor"/>
-          <path d="M990.812 0H848.531C846.443 0 844.575 1.29718 843.846 3.25343L627.253 584.253C626.035 587.521 628.451 591 631.938 591H775.271C777.361 591 779.231 589.699 779.958 587.739L995.5 6.7391C996.712 3.47306 994.296 0 990.812 0Z" fill="currentColor"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- HEADLINE -->
-    <div class="headline">
-      <h1>AI DRIFTS-<br>SYSTEMET<br>FOR NORSKE<br>BEDRIFTER.</h1>
-    </div>
-
-    <!-- HVA VI GJØR -->
-    <button class="about-btn" onclick="openPanel()">
-      Hva vi gjør
-      <span class="circle">→</span>
-    </button>
+    <!-- VIZ ANIMATION -->
+    <iframe id="vizFrame" src="viz.html" style="width:100%;height:100%;border:none;display:block;" scrolling="no"></iframe>
 
     <!-- TOGGLE dark/light -->
     <div class="toggle-wrap">
@@ -569,83 +489,6 @@
       <p>Vi setter opp et AI Driftssystem lag for lag rundt hele bedriften din. Et system som kjenner din bedrift, forstår tallene og kan handle på vegne av deg. Ikke teoretisk. I din hverdag, på din telefon, i dine systemer.</p>
       <p>Målet vi bryr oss om: <strong>økt omsetning per ansatt.</strong> Det er indikatoren som beveger seg når systemet faktisk virker.</p>
 
-      <div class="viz-wrap">
-        <div class="viz-top">
-
-          <!-- VENSTRE: Tradisjonell drift -->
-          <div class="viz-side">
-            <div class="viz-side-title dim">Tradisjonell drift</div>
-            <div class="viz-grid">
-              <div class="viz-tile">
-                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
-                <span class="viz-tile-label">E-post</span>
-              </div>
-              <div class="viz-tile">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                <span class="viz-tile-label">Regneark</span>
-              </div>
-              <div class="viz-tile">
-                <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-4 3 3 4-5"/></svg>
-                <span class="viz-tile-label">Annonser</span>
-              </div>
-              <div class="viz-tile">
-                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-                <span class="viz-tile-label">CRM</span>
-              </div>
-              <div class="viz-tile">
-                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
-                <span class="viz-tile-label">Regnskap</span>
-              </div>
-              <div class="viz-tile">
-                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <span class="viz-tile-label">Møter</span>
-              </div>
-            </div>
-            <div class="viz-sub">Installer apper → ny funksjon</div>
-          </div>
-
-          <!-- PIL -->
-          <div class="viz-arr">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13,6 19,12 13,18"/>
-            </svg>
-          </div>
-
-          <!-- HØYRE: AI Driftssystem -->
-          <div class="viz-side">
-            <div class="viz-side-title lit">AI Driftssystem</div>
-            <div class="viz-grid">
-              <div class="viz-tile ai">
-                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-                <span class="viz-tile-label">Agenter</span>
-              </div>
-              <div class="viz-tile ai">
-                <svg viewBox="0 0 24 24"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg>
-                <span class="viz-tile-label">Triggere</span>
-              </div>
-              <div class="viz-tile ai">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-                <span class="viz-tile-label">Tidsplan</span>
-              </div>
-              <div class="viz-tile ai">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                <span class="viz-tile-label">Verktøy</span>
-              </div>
-              <div class="viz-tile ai">
-                <svg viewBox="0 0 24 24"><polygon points="12,2 2,7 12,12 22,7"/><polyline points="2,17 12,22 22,17"/><polyline points="2,12 12,17 22,12"/></svg>
-                <span class="viz-tile-label">Kontekst</span>
-              </div>
-              <div class="viz-tile ai">
-                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                <span class="viz-tile-label">Analyse</span>
-              </div>
-            </div>
-            <div class="viz-sub">Legg til kapasitet → ny funksjon</div>
-          </div>
-
-        </div>
-        <div class="viz-tagline"><em>Samme idé. Installer kapasitet, ikke ansett mer folk.</em></div>
-      </div>
 
     </div>
 
@@ -698,7 +541,7 @@
       <div class="ps-label">Ta det første steget</div>
       <p>Vi tar en uforpliktende samtale om hvilke lag som gir mest effekt for din bedrift.</p>
       <button class="cta-btn" onclick="window.open('mailto:admin@wabi.no?subject=Henvendelse fra wabi.no', '_self')">Ta kontakt →</button>
-      <p class="cta-note">Vi svarer innen én arbeidsdag. Ingen forpliktelser.</p>
+      <p class="cta-note">Vi svarer innen en arbeidsdag. Ingen forpliktelser.</p>
     </div>
 
   </div>
@@ -709,8 +552,8 @@
         document.getElementById('loader').classList.add('out');
         setTimeout(function() {
           document.getElementById('loader').style.display = 'none';
-        }, 750);
-      }, 1700);
+        }, 1250);
+      }, 1600);
     });
 
     function sendMail(e) {
@@ -731,8 +574,15 @@
     updateClock();
     setInterval(updateClock, 10000);
 
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.action === 'openPanel') openPanel();
+    });
+
     function toggleTheme() {
       document.documentElement.classList.toggle('light');
+      const isLight = document.documentElement.classList.contains('light');
+      const frame = document.getElementById('vizFrame');
+      if (frame) frame.contentWindow.postMessage({ theme: isLight ? 'light' : 'dark' }, '*');
     }
 
     function openPanel() {
