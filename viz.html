@@ -5,7 +5,8 @@
 <title>AI Driftssystem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -42,8 +43,8 @@
   }
 
   html, body {
-    width: 100%; height: 100%;
-    overflow: hidden;
+    width: 100%; min-height: 100%;
+    overflow-x: hidden;
     background: var(--bg);
     color: var(--fg);
     font-family: 'Montserrat', system-ui, sans-serif;
@@ -448,31 +449,94 @@
 
   /* ── Mobile ─────────────────────────────────────── */
   @media (max-width: 700px) {
-    .legacy, .bridge, .markers { display: none; }
+    body::before { mask-image: none; opacity: 0.5; }
+    .stage { padding: 80px 16px 24px; min-height: 100vh; align-items: flex-start; }
+    .page-title { font-size: clamp(17px, 4.6vw, 22px); margin-bottom: 14px; }
+    .about-btn { padding: 11px 18px; font-size: 11px; letter-spacing: 0.8px; }
+    .markers, .system-caption, .legacy-label, .legacy-caption { display: none; }
     .main-grid {
       grid-template-columns: 1fr;
       justify-items: center;
+      gap: 0;
     }
+
+    /* Legacy — top of vertical flow */
+    .legacy {
+      height: 220px;
+      max-width: 340px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .legacy-stack { height: 220px; }
+    .legacy-tile { width: 132px; padding: 11px 10px; }
+    .legacy-tile span { font-size: 11px; }
+    .legacy-tile:nth-child(1) { top: 4px;   left: 2%;  }
+    .legacy-tile:nth-child(2) { top: 22px;  left: 52%; }
+    .legacy-tile:nth-child(3) { top: 76px;  left: 14%; }
+    .legacy-tile:nth-child(4) { top: 94px;  left: 48%; }
+    .legacy-tile:nth-child(5) { top: 148px; left: 4%;  }
+    .legacy-tile:nth-child(6) { top: 166px; left: 50%; }
+    .legacy-caption {
+      left: 50%; right: auto;
+      transform: translateX(-50%);
+      bottom: -6px; white-space: nowrap; font-size: 9px;
+    }
+
+    /* Bridge — vertical arrow pointing down */
+    .bridge {
+      width: 100%;
+      height: 110px;
+      margin: 6px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .bridge-arrow {
+      width: 180px;
+      height: 80px;
+      transform: rotate(90deg);
+      transform-origin: center center;
+    }
+
+    /* System — bottom of flow */
     .system {
       height: auto;
       width: 100%;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
-    .system-label { text-align: center; }
+    .system-label { text-align: center; font-size: 22px; margin-top: 14px; margin-bottom: 30px; }
     .system-core {
-      height: 380px;
-      transform: scale(0.82);
+      height: 220px;
+      transform: scale(0.72);
       transform-origin: center center;
     }
+
+    .title-row { margin: 18px 0 8px; }
+    .values { margin-top: 20px; }
+    .value { padding: 14px 6px; }
+    .value-num { font-size: 26px; letter-spacing: -0.8px; margin-bottom: 2px; }
+    .value-label { font-size: 8px; letter-spacing: 0.8px; margin-bottom: 3px; }
+    .value-sub { font-size: 9.5px; line-height: 1.35; }
+    .tagline { margin-top: 18px; padding-bottom: 8px; }
+    .tagline-line { font-size: clamp(13px, 3.6vw, 16px); padding: 0 6px; line-height: 1.3; }
+    .tagline-accent::after { height: 5px; }
   }
 
-  @media (max-width: 420px) {
-    .system-core {
-      height: 320px;
-      transform: scale(0.68);
-    }
+  @media (max-width: 380px) {
+    .stage { padding: 72px 14px 20px; }
+    .legacy { max-width: 300px; }
+    .legacy-tile { width: 120px; padding: 9px; }
+    .legacy-tile span { font-size: 10px; }
+    .bridge-arrow { width: 160px; height: 70px; }
+    .system-label { margin-bottom: 24px; }
+    .system-core { height: 190px; transform: scale(0.64); }
+    .value { padding: 12px 3px; }
+    .value-num { font-size: 22px; }
+    .value-label { font-size: 7px; letter-spacing: 0.3px; }
+    .value-sub { font-size: 9px; }
   }
 </style>
 </head>

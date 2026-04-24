@@ -22,73 +22,29 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:              #080808;
-      --fg:              #ffffff;
-      --fg-dim:          rgba(255,255,255,0.35);
-      --fg-mid:          rgba(255,255,255,0.55);
-      --ring-glow:       rgba(62,87,67,0.05);
-      --ring-track:      rgba(255,255,255,0.05);
-      --ring-stroke-lg:  rgba(255,255,255,0.13);
-      --ring-stroke-sm:  rgba(255,255,255,0.06);
-      --ring-stroke-mid: rgba(255,255,255,0.18);
-      --ring-stroke-mi2: rgba(255,255,255,0.07);
-      --ring-stroke-in:  rgba(255,255,255,0.22);
-      --ring-stroke-in2: rgba(255,255,255,0.07);
-      --ring-fill-mid:   rgba(255,255,255,0.018);
-      --ring-text:       rgba(255,255,255,1);
-      --ring-text-mid:   rgba(255,255,255,0.72);
-      --ring-text-dim:   rgba(255,255,255,0.38);
-      --ring-arr:        rgba(255,255,255,0.45);
-      --ring-arr-mid:    rgba(255,255,255,0.30);
-      --crosshair:       rgba(255,255,255,0.07);
-      --center-fill:     rgba(0,0,0,0.90);
-      --center-fill2:    rgba(6,6,6,0.95);
-      --center-text:     #ffffff;
-      --center-text-dim: rgba(255,255,255,0.30);
-      --panel-bg:        #ffffff;
-      --panel-fg:        #111111;
-      --panel-p:         #333333;
-      --panel-div:       #e8e8e8;
-      --panel-num:       #bbbbbb;
-      --panel-sub:       #666666;
-      --input-border:    #dddddd;
-      --input-focus:     #111111;
-      --note-col:        #bbbbbb;
+      --bg:        #080808;
+      --fg:        #ffffff;
+      --fg-dim:    rgba(255,255,255,0.35);
+      --fg-mid:    rgba(255,255,255,0.55);
+      --panel-bg:  #ffffff;
+      --panel-fg:  #111111;
+      --panel-p:   #333333;
+      --panel-div: #e8e8e8;
+      --panel-sub: #666666;
+      --note-col:  #bbbbbb;
     }
 
     html.light {
-      --bg:              #f0f0f0;
-      --fg:              #000000;
-      --fg-dim:          rgba(0,0,0,0.40);
-      --fg-mid:          rgba(0,0,0,0.60);
-      --ring-glow:       rgba(0,0,0,0.03);
-      --ring-track:      rgba(0,0,0,0.04);
-      --ring-stroke-lg:  rgba(0,0,0,0.18);
-      --ring-stroke-sm:  rgba(0,0,0,0.07);
-      --ring-stroke-mid: rgba(0,0,0,0.22);
-      --ring-stroke-mi2: rgba(0,0,0,0.08);
-      --ring-stroke-in:  rgba(0,0,0,0.28);
-      --ring-stroke-in2: rgba(0,0,0,0.08);
-      --ring-fill-mid:   rgba(0,0,0,0.018);
-      --ring-text:       rgba(0,0,0,1);
-      --ring-text-mid:   rgba(0,0,0,0.72);
-      --ring-text-dim:   rgba(0,0,0,0.45);
-      --ring-arr:        rgba(0,0,0,0.45);
-      --ring-arr-mid:    rgba(0,0,0,0.30);
-      --crosshair:       rgba(0,0,0,0.10);
-      --center-fill:     rgba(240,240,240,0.95);
-      --center-fill2:    rgba(235,235,235,0.98);
-      --center-text:     #000000;
-      --center-text-dim: rgba(0,0,0,0.35);
-      --panel-bg:        #ffffff;
-      --panel-fg:        #111111;
-      --panel-p:         #333333;
-      --panel-div:       #e0e0e0;
-      --panel-num:       #aaaaaa;
-      --panel-sub:       #555555;
-      --input-border:    #cccccc;
-      --input-focus:     #000000;
-      --note-col:        #aaaaaa;
+      --bg:        #f0f0f0;
+      --fg:        #000000;
+      --fg-dim:    rgba(0,0,0,0.40);
+      --fg-mid:    rgba(0,0,0,0.60);
+      --panel-bg:  #ffffff;
+      --panel-fg:  #111111;
+      --panel-p:   #333333;
+      --panel-div: #e0e0e0;
+      --panel-sub: #555555;
+      --note-col:  #aaaaaa;
     }
 
     html, body {
@@ -108,12 +64,8 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 28px 40px; z-index: 200;
     }
-    .logo { display: flex; align-items: center; }
+    .logo { display: flex; align-items: center; cursor: pointer; }
     .logo svg { height: 26px; width: 44px; color: var(--fg); transition: color .4s; display: block; }
-    .menu-btn {
-      font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-      background: none; border: none; color: var(--fg); cursor: pointer;
-    }
 
     /* ── TICKER ── */
     .ticker {
@@ -122,41 +74,6 @@
       color: var(--fg-dim); z-index: 200; display: flex; gap: 10px; white-space: nowrap;
     }
     #clock { color: var(--fg-mid); font-variant-numeric: tabular-nums; }
-
-    /* ── RING ── */
-    .ring-wrap {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: min(660px,82vmin); height: min(660px,82vmin);
-    }
-    .ring-wrap svg { width: 100%; height: 100%; overflow: visible; }
-
-    .r-outer { animation: cw  70s linear infinite; transform-origin: 300px 300px; }
-    .r-mid   { animation: ccw 45s linear infinite; transform-origin: 300px 300px; }
-    .r-inner { animation: cw  28s linear infinite; transform-origin: 300px 300px; }
-
-    @keyframes cw  { to { transform: rotate(360deg);  } }
-    @keyframes ccw { to { transform: rotate(-360deg); } }
-
-    .center-btn { cursor: pointer; transition: fill .25s; }
-    .center-btn:hover { fill: rgba(62,87,67,0.10); }
-    .center-glow { transition: opacity .25s; opacity: 0; pointer-events: none; }
-    .center-btn:hover + .center-glow { opacity: 1; }
-    .center-logo { color: rgba(255,255,255,0.9); transition: color .4s; }
-    html.light .center-logo { color: rgba(0,0,0,0.9); }
-
-
-    /* ── ABOUT BTN ── */
-    .about-btn {
-      position: fixed; bottom: 36px; left: 40px; z-index: 200;
-      display: flex; align-items: center; gap: 10px;
-      background: #3e5743; color: #ffffff; cursor: pointer;
-      font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
-      border: none; border-radius: 8px; padding: 14px 24px;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 0 0 0 rgba(62,87,67,0);
-    }
-    .about-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(62,87,67,0.35); }
-    .about-btn .circle { font-size: 15px; line-height: 1; }
 
     /* ── TOGGLE ── */
     .toggle-wrap { position: fixed; bottom: 36px; right: 40px; z-index: 200; }
@@ -241,9 +158,7 @@
     /* ── TABLET / IPAD (600px – 1024px) ── */
     @media (min-width: 600px) and (max-width: 1024px) {
       nav { padding: 24px 32px; }
-      .ticker { top: 27px; font-size: 11px; }
-      .ring-wrap { width: min(600px,80vmin); height: min(600px,80vmin); }
-      .about-btn { bottom: 36px; left: 32px; }
+      .ticker { top: 27px; right: 32px; font-size: 11px; }
       .toggle-wrap { bottom: 36px; right: 32px; }
       .panel { width: min(560px,100vw); padding: 80px 40px; }
       .panel-close { margin: -80px -40px 48px; padding: 28px 40px; }
@@ -251,104 +166,28 @@
 
     /* ── MOBILE (≤ 599px) ── */
     @media (max-width: 599px) {
-      nav { padding: 20px 24px; }
-      .ticker { top: 22px; font-size: 10px; letter-spacing: 1px; gap: 6px; }
-      .ring-wrap { top: 43%; width: min(420px,78vmin); height: min(420px,78vmin); }
-      .about-btn { bottom: 44px; left: 24px; font-size: 13px; }
-      .toggle-wrap { bottom: 44px; right: 24px; }
-      .panel { padding: 70px 24px; }
-      .panel-close { margin: -70px -24px 36px; padding: 20px 24px; }
-      .panel h2 { font-size: clamp(28px,7vw,42px); letter-spacing: -1.5px; margin-bottom: 36px; white-space: nowrap; }
-      .ps p { font-size: 15px; line-height: 1.7; }
-      .divider { margin: 28px 0; }
+      nav { padding: 18px 20px; }
+      .logo svg { height: 22px; width: 38px; }
+      .ticker { top: 22px; right: 20px; font-size: 10px; letter-spacing: 1px; gap: 6px; }
+      .toggle-wrap { bottom: 24px; right: 20px; }
+      .toggle { width: 42px; height: 23px; }
+      .toggle::after { width: 15px; height: 15px; }
+      html.light .toggle::after { transform: translateX(-19px); }
+      .panel { padding: 64px 22px 40px; }
+      .panel-close { margin: -64px -22px 32px; padding: 18px 22px; }
+      .panel h2 { font-size: clamp(30px,8vw,44px); letter-spacing: -1.5px; margin-bottom: 32px; white-space: nowrap; }
+      .ps { margin-bottom: 28px; }
+      .ps-label { font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
+      .ps p { font-size: 15px; line-height: 1.65; }
+      .divider { margin: 26px 0; }
+      .pillars { gap: 16px; }
+      .cta-btn { padding: 16px 26px; font-size: 14px; }
     }
 
     /* ── LANDSCAPE PHONE ── */
     @media (max-height: 500px) and (orientation: landscape) {
-      .ring-wrap { top: 50%; width: min(360px,65vh); height: min(360px,65vh); }
-      .about-btn { bottom: 20px; }
       .toggle-wrap { bottom: 20px; }
       .ticker { display: none; }
-    }
-
-    /* ── VISUALIZATION ── */
-    .viz-wrap {
-      background: #0e0e0e;
-      border-radius: 14px;
-      padding: 28px 24px 22px;
-      margin: 28px 0 0;
-    }
-    .viz-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .viz-side { flex: 1; min-width: 0; }
-    .viz-side-title {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-      margin-bottom: 12px;
-      white-space: nowrap;
-    }
-    .viz-side-title.dim  { color: rgba(255,255,255,0.45); }
-    .viz-side-title.lit  { color: #4a9eff; }
-    .viz-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-    }
-    .viz-tile {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 9px;
-      padding: 11px 6px 9px;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 6px;
-    }
-    .viz-tile svg {
-      width: 20px; height: 20px;
-      stroke: rgba(255,255,255,0.28);
-      stroke-width: 1.5; fill: none;
-      stroke-linecap: round; stroke-linejoin: round;
-      flex-shrink: 0;
-    }
-    .viz-tile-label {
-      font-size: 9.5px; font-weight: 600;
-      color: rgba(255,255,255,0.32);
-      text-align: center; line-height: 1.2;
-    }
-    .viz-tile.ai {
-      background: rgba(74,158,255,0.07);
-      border-color: rgba(74,158,255,0.18);
-    }
-    .viz-tile.ai svg { stroke: #4a9eff; }
-    .viz-tile.ai .viz-tile-label { color: rgba(255,255,255,0.72); }
-    .viz-arr {
-      display: flex; align-items: center; justify-content: center;
-      padding-top: 24px; flex-shrink: 0;
-    }
-    .viz-sub {
-      font-size: 9px; color: rgba(255,255,255,0.22);
-      text-align: center; margin-top: 10px; letter-spacing: 0.1px;
-    }
-    .viz-tagline {
-      text-align: center; font-size: 12px; font-weight: 800;
-      color: #fff; margin-top: 20px; padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      letter-spacing: -0.1px; line-height: 1.5;
-    }
-    .viz-tagline em {
-      font-style: normal;
-      border-bottom: 1.5px solid #4a9eff;
-      padding-bottom: 1px;
-    }
-    @media (max-width: 480px) {
-      .viz-wrap  { padding: 20px 14px 16px; }
-      .viz-grid  { gap: 5px; }
-      .viz-tile  { padding: 9px 4px 8px; gap: 5px; }
-      .viz-tile svg { width: 16px; height: 16px; }
-      .viz-tile-label { font-size: 8px; }
     }
 
     /* ── LOADER ── */
@@ -426,7 +265,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="logo" onclick="openPanel()" style="cursor:pointer;">
+    <div class="logo" onclick="openPanel()">
       <svg viewBox="0 0 996 591" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M213.507 140.777L168.118 3.43107C167.441 1.38312 165.527 0 163.37 0H82.492H5.20003C1.71313 0 -0.702996 3.47925 0.514983 6.74651L130.079 354.304C131.712 358.685 137.928 358.628 139.48 354.218L213.476 144.006C213.844 142.963 213.855 141.827 213.507 140.777Z" fill="currentColor"/>
         <path d="M219.458 584.412L335.436 238.128C336.967 233.558 343.441 233.586 344.932 238.169L416.182 457.168L373.46 587.557C372.787 589.611 370.87 591 368.708 591H224.199C220.783 591 218.373 587.651 219.458 584.412Z" fill="currentColor"/>
@@ -449,7 +288,7 @@
   <div class="screen">
 
     <!-- VIZ ANIMATION -->
-    <iframe id="vizFrame" src="viz.html" style="width:100%;height:100%;border:none;display:block;" scrolling="no"></iframe>
+    <iframe id="vizFrame" src="viz.html" style="width:100%;height:100%;border:none;display:block;"></iframe>
 
     <!-- TOGGLE dark/light -->
     <div class="toggle-wrap">
@@ -555,16 +394,6 @@
         }, 1250);
       }, 1600);
     });
-
-    function sendMail(e) {
-      e.preventDefault();
-      const navn = e.target.navn.value;
-      const email = e.target.email.value;
-      const melding = e.target.melding.value;
-      const subject = encodeURIComponent('Henvendelse fra ' + navn);
-      const body = encodeURIComponent('Navn og bedrift: ' + navn + '\nE-post: ' + email + '\n\nMelding:\n' + melding);
-      window.location.href = 'mailto:admin@wabi.no?subject=' + subject + '&body=' + body;
-    }
 
     function updateClock() {
       const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
